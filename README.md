@@ -11,7 +11,7 @@ Please make sure that you have `mono` and `mcs` in your path. If not, just do:
 ##Usage
 
 	var NodeCSharp = require('NodeCSharp');
-	NodeCSharp('pathToYourMain.cs').then(function(res) {
+	NodeCSharp.fromFile('pathToYourMain.cs').then(function(res) {
     	console.log(res);
 	});
 
