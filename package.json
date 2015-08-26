@@ -1,0 +1,22 @@
+{
+  "name": "node-csharp",
+  "version": "0.1.0",
+  "description": "It is simple wrapper around mono utilities that allows you to compile and run your C# app from source.",
+  "main": "lib/NodeCSharp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krzkaczor/node-csharp.git"
+  },
+  "author": "Krzysztof Kaczor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krzkaczor/node-csharp/issues"
+  },
+  "homepage": "https://github.com/krzkaczor/node-csharp#readme",
+  "dependencies": {
+    "q": "1.4.1"
+  }
+}
