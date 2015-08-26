@@ -11,12 +11,17 @@ Please make sure that you have `mono` and `mcs` in your path. If not, just do:
 ##Usage
 
 	var NodeCSharp = require('NodeCSharp');
+	
 	NodeCSharp.fromFile('pathToYourMain.cs').then(function(res) {
     	console.log(res);
 	});
+	
+It uses promises instead of callbacks.
 
 ##Motivation
-If you didn't heard about [Edge JS](https://github.com/tjanczuk/edge), please go check it out - it will probably suit your needs ;)
+I needed a way to run plain C# source code. I use it in validation tests for my translator which target language is C#. So it is rather specific use of mono.
+
+If you didn't heard about [Edge JS](https://github.com/tjanczuk/edge), please go check it out - it will probably suit your needs much better :) 
 
 
 ##Crossplatform
