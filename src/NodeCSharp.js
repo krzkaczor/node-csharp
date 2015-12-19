@@ -1,5 +1,3 @@
-'use strict';
-
 var fs = require('fs');
 var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
@@ -7,16 +5,13 @@ var spawn = require('child_process').spawn;
 var tmp = require('tmp');
 tmp.setGracefulCleanup();
 
-var fromSource = function fromSource(programSource) {
-    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-    var callback = arguments[2];
-
-    tmp.file(function (err, path) {
+var fromSource = function(programSource, options = {}, callback) {
+    tmp.file((err, path) => {
         if (err) {
             return callback(true);
         }
 
-        fs.writeFile(path, programSource, function (err) {
+        fs.writeFile(path, programSource, function(err) {
             if (err) {
                 return callback(true);
             }
@@ -26,16 +21,13 @@ var fromSource = function fromSource(programSource) {
     });
 };
 
-var fromFile = function fromFile(programPath) {
-    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-    var callback = arguments[2];
-
-    tmp.tmpName(function (err, exePath) {
+var fromFile = function (programPath, options = {}, callback) {
+    tmp.tmpName((err, exePath) => {
         if (err) {
             return callback(true);
         }
 
-        var mcsCommand = 'mcs -o ' + exePath + ' ' + programPath;
+        var mcsCommand = `mcs -o ${exePath} ${programPath}`;
         var monoCommand = 'mono';
 
         exec(mcsCommand, function (error) {
@@ -51,11 +43,11 @@ var fromFile = function fromFile(programPath) {
 
             var output = '';
 
-            spawnedProgram.stdout.on('data', function (chunk) {
+            spawnedProgram.stdout.on('data', function(chunk) {
                 output += chunk.toString();
             });
 
-            spawnedProgram.on('exit', function (code) {
+            spawnedProgram.on('exit', function(code) {
                 if (code !== 0) {
                     callback(true, error + output);
                     return;
@@ -64,14 +56,22 @@ var fromFile = function fromFile(programPath) {
                 callback(false, output);
             });
         });
-    });
+    })
 };
 
-console.log(fromSource('public class Hello1\n{\n   public static void Main()\n   {\n      System.Console.WriteLine("Hello, World!");\n   }\n}\n', {}, function (err, res) {
+console.log(fromSource(`public class Hello1
+{
+   public static void Main()
+   {
+      System.Console.WriteLine("Hello, World!");
+   }
+}
+`, {}, function(err, res) {
     console.log(res);
 }));
 
 module.exports = {
-    fromSource: fromSource,
-    fromFile: fromFile
+    fromSource,
+    fromFile
 };
+
