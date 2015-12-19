@@ -59,17 +59,6 @@ var fromFile = function (programPath, options = {}, callback) {
     })
 };
 
-console.log(fromSource(`public class Hello1
-{
-   public static void Main()
-   {
-      System.Console.WriteLine("Hello, World!");
-   }
-}
-`, {}, function(err, res) {
-    console.log(res);
-}));
-
 module.exports = {
     fromSource,
     fromFile
