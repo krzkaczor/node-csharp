@@ -1,6 +1,6 @@
 {
   "name": "node-csharp",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A simple wrapper around mono utilities that allows you to compile and run your C# app from source.",
   "main": "lib/nodeCSharp.js",
   "scripts": {
