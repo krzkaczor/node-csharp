@@ -1,7 +1,7 @@
 var test = require('tape');
 var s2str = require('string-to-stream');
 
-var CSharp = require('../lib/nodeCSharp');
+var nodeCSharp = require('../lib/nodeCSharp');
 
 test('should run basic program', (t) => {
     t.plan(1);
@@ -14,7 +14,7 @@ test('should run basic program', (t) => {
            }
         }`;
 
-    CSharp.fromSource(sourceProgram, {}, (err, res) => {
+    nodeCSharp.fromSource(sourceProgram, {}, (err, res) => {
         t.equal(res, "Hello, World!\n");
     });
 });
@@ -33,7 +33,7 @@ test('should pass stdin', (t) => {
 
     var stdin = s2str("Hello node-csharp!");
 
-    CSharp.fromSource(sourceProgram, {stdin}, (err, res) => {
+    nodeCSharp.fromSource(sourceProgram, {stdin}, (err, res) => {
         t.equal(res, "HELLO NODE-CSHARP!\n");
     });
 });

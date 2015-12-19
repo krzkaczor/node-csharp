@@ -1,28 +1,57 @@
 # node-csharp
 
-It is simple wrapper around mono utilities that allows you to compile and run your C# app from source.
+Simple wrapper around mono compiler.
 
-##Installation
-Please make sure that you have `mono` and `mcs` in your path. If not, just do:
+## Installation
+Please make sure that you have `mono` and `mcs` in your path. To install package run:
+    
+    npm install node-csharp
 
-	brew install mono
-		
+## Usage
 
-##Usage
+    var nodeCSharp = require('../lib/nodeCSharp');
 
-	var NodeCSharp = require('NodeCSharp');
+	var sourceProgram = `public class Hello1
+        {
+           public static void Main()
+           {
+              System.Console.WriteLine("Hello, World!");
+           }
+        }`;
+
+    nodeCSharp.fromSource(sourceProgram, {}, (err, res) => {
+        console.log(res);
+    });
+    
+You can also pass input stream:
+
+    var nodeCSharp = require('../lib/nodeCSharp');
+    var s2str = require('string-to-stream');
+
+    var sourceProgram = `public class Hello1
+    {
+        public static void Main()
+        {
+            var readLine = System.Console.ReadLine();
+            System.Console.WriteLine(readLine.ToUpper());
+        }
+    }`;
+
+    var stdin = s2str("Hello node-csharp!");
+
+    nodeCSharp.fromSource(sourceProgram, {stdin}, (err, res) => {
+        console.log(res);
+    });
 	
-	NodeCSharp.fromFile('pathToYourMain.cs').then(function(res) {
-    	console.log(res);
-	});
-	
-It uses promises instead of callbacks.
+### Promise support
+For now library uses standard nodeback api. To use promises you can wrap it using for example [promisify-node](https://www.npmjs.com/package/promisify-node)
+ 
+    var promisify = require("promisify-node");
+    var nodeCSharp = promisify("node-csharp");   
 
-##Motivation
-I needed a way to run plain C# source code. I use it in validation tests for my translator which target language is C#. So it is rather specific use of mono.
-
-If you didn't heard about [Edge JS](https://github.com/tjanczuk/edge), please go check it out - it will probably suit your needs much better :) 
+## Motivation
+Edge.js is excellent library for using .NET in Javascript but it expects custom program entry. `node-csharp` is just a wrapper on top of mono so it expects standard `Main` method.   
 
 
-##Crossplatform
-For now I have tested it only on Mac.
+## Crossplatform
+Tested on Mac and Linux.
