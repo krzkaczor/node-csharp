@@ -1,6 +1,6 @@
 # node-csharp
 
-Simple wrapper around mono compiler.
+[![Build Status](https://travis-ci.org/krzkaczor/node-csharp.svg?branch=master)](https://travis-ci.org/krzkaczor/node-csharp)
 
 ## Installation
 Please make sure that you have `mono` and `mcs` in your path. To install package run:
