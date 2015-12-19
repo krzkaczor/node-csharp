@@ -2,7 +2,7 @@
   "name": "node-csharp",
   "version": "0.2.0",
   "description": "It is simple wrapper around mono utilities that allows you to compile and run your C# app from source.",
-  "main": "src/NodeCSharp.js",
+  "main": "src/nodecsharp.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
     "compile-test": "babel -d tests-es5/ tests/",
@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/krzkaczor/node-csharp#readme",
   "dependencies": {
-    "q": "1.4.1",
     "tmp": "0.0.28"
   },
   "devDependencies": {
